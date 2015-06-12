@@ -8,10 +8,10 @@
  */
 
 'use strict';
-
+/*
 var mongoose   = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/tbaBlog'); // connect to our database
-
+*/
 
 // Get list of things
 exports.index = function(req, res) {
