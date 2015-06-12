@@ -1,0 +1,29 @@
+{
+  "name": "fdj",
+  "version": "0.0.0",
+  "main": "server/app.js",
+  "dependencies": {
+    "body-parser": "~1.5.0",
+    "compression": "^1.5.0",
+    "connect": "^3.3.5",
+    "connect-mongo": "^0.4.1",
+    "cookie-parser": "~1.0.1",
+    "ejs": "~0.8.4",
+    "express": "~4.0.0",
+    "express-session": "~1.0.2",
+    "method-override": "~1.0.0",
+    "mysql": "^2.6.1",
+    "passport": "^0.2.2",
+    "passport-local": "^1.0.0",
+    "serve-static": "^1.9.3"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "start": "node server/app.js",
+    "test": "grunt test",
+    "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update"
+  },
+  "private": true
+}
