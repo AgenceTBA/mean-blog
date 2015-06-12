@@ -1,0 +1,57 @@
+#logo_header {
+  height: 60px;
+  width: 60px;
+  margin-left: 20px;
+}
+
+.on_right {
+  float: right;
+}
+
+#bloc_central {
+  margin-top: 10%;
+  margin-left: 20%;
+  margin-right: 20%;
+  padding: 5%;
+}
+
+.page-header {
+  margin-right: 5%;
+  margin-top: 5px;
+}
+
+.article {
+  margin-top: 5%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.resume {
+  margin-top: 10px;
+}
+
+.img_article {
+  width: 600px;
+}
+
+.img_profil {
+  width: 150px;
+  padding: 10px;
+  display: block;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.media {
+  border-top : 1px solid #C0C0C0;
+}
+
+.homeLink, .homeLink:focus, .homeLink:hover {
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+  font-weight: bold;
+}
+.nav.nav-pills.on_right {
+  margin-top: 10px;
+}
