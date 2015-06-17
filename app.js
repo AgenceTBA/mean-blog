@@ -1,26 +1,42 @@
-var express = require('express');
-var app = express();
-var passport = require('passport')
-var compression = require('compression')
-var port = 9000;
+var express  = require('express');
+var app      = express();
+var port     = process.env.PORT || 9000;
+var mongoose = require('mongoose');
+var passport = require('passport');
+var flash    = require('connect-flash');
 
-require('./routes')(app);
+var morgan       = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser   = require('body-parser');
+var session      = require('express-session');
 
-//require('./routes')(app, passport);
-//require('./config/passport')(passport); // pass passport for configuration
+
+require('./config/passport')(passport); // pass passport for configuration
+
+
+// set up our express application
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.set('view engine', 'ejs'); // set up ejs for templating
+
+// required for passport
+app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+
+require('./routes')(app, passport);
+
+mongoose.connect('mongodb://localhost:27017/tbaBlog'); // connect to our database
 
 // New call to compress content
-app.use(compression())
 app.use(express.static(__dirname + '/client'));
 app.listen(port);
 console.log("Server Started");
 
-/*
-// process the signup form
-app.post('/login', passport.authenticate('local-login', {
-    successRedirect : '/', // redirect to the secure profile section
-    failureRedirect : '/login', // redirect back to the signup page if there is an error
-    failureFlash : true // allow flash messages
-}));
-*/
+
 //exports = module.exports = app;
