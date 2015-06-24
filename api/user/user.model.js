@@ -6,6 +6,8 @@ var UserDetail = new Schema({
     local            : {
         email        : String,
         password     : String,
+        prenom       : String,
+        nom          : String,
     },
     facebook         : {
         id           : String,

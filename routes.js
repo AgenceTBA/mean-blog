@@ -13,10 +13,10 @@ module.exports = function(app, passport) {
 		failureRedirect : '/loginFailure' // redirect back to the signup page if there is an error
 	}));
 	app.get('/loginFailure', function(req, res, next) {
-		res.send('/#/login');
+		res.send('/login');
 	});
 	app.get('/loginSuccess', function(req, res, next) {
-		res.send('/#/home');
+		res.send('/home');
 	});
 //INSCRIPTION
     // process the signup form
@@ -25,10 +25,10 @@ module.exports = function(app, passport) {
         failureRedirect : '/signupFailure', // redirect back to the signup page if there is an error
     }));
 	app.get('/signupFailure', function(req, res, next) {
-		res.send('/#/signup');
+		res.send('/signup');
 	});
 	app.get('/signupSuccess', function(req, res, next) {
-		res.send('/#/login');
+		res.send('/login');
 	});
 
 	
