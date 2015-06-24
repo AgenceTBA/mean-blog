@@ -1,0 +1,22 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="container">
+	<div class="row" ng-model="article">
+		<div class="col-lg-push-1 col-lg-10 article">
+			<div>
+				<h1 class="page-header">{{article.title}}</h1>
+				<h6>{{article.creationDate | date : 'dd MMMM yyyy'}}</h6>
+				<p>{{article.body}}</p>
+			</div>
+			<div ng-repeat="commentaire in article.commentaires">
+				<h1 class="page-header">{{commentaire.author}}</h1>
+				<h6>{{commentaire.creationDate | date : 'dd MMMM yyyy'}}</h6>
+				<p>{{commentaire.body}}</p>
+			</div>
+			<div ng-show="isLoggedIn()" >
+				<h3 class="page-header">Ajouter un commentaire</h3>
+				<textarea ng-model="newCommentaire"></textarea><br>
+				<button class="btn btn-default btn-md btn-register" ng-click="sendCommentaire(newCommentaire)">Envoyer</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,42 @@
+$icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+$fa-font-path: "/bower_components/font-awesome/fonts";
+
+@import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
+@import 'font-awesome/scss/font-awesome';
+
+/**
+ * App-wide Styles
+ */
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+.fond {
+	background-color: #C8C8C8;
+}
+.black {
+	background-color: black !important;
+		color: white !important;
+
+}  
+.article {
+    margin-bottom: 3%;
+	background-color: white;
+    -moz-box-shadow: 2px 1px 5px 0px #656565;
+    -webkit-box-shadow: 2px 1px 5px 0px #656565;
+    -o-box-shadow: 2px 1px 5px 0px #656565;
+    box-shadow: 2px 1px 5px 0px #656565;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=116, Strength=5);
+    padding: 2%;
+} 
+// Component styles are injected through grunt
+// injector
+@import 'account/login/login.scss';
+@import 'admin/admin.scss';
+@import 'article/article.scss';
+@import 'main/main.scss';
+@import 'modal/modal.scss';
+// endinjector
