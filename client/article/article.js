@@ -9,6 +9,6 @@ angular.module('myApp.article', ['ngRoute'])
   });
 }])
 
-.controller('ArticleCtrl', [function() {
+.controller('ArticleCtrl', function(Article) {
 
-}]);
+})

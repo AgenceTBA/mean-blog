@@ -9,6 +9,12 @@ angular.module('myApp.home', ['ngRoute'])
   });
 }])
 
-.controller('HomeCtrl', [function() {
+.controller('HomeCtrl', function($scope, Article) {
+    $scope.articles = [];
 
-}]);
+    Article.query({}, function (data) {
+      $scope.articles = data;
+      console.log(data)
+    });
+
+});
