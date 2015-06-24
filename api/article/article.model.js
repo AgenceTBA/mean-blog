@@ -6,7 +6,10 @@ var ArticleDetail = new Schema({
     contenu             : String,
     date_creation       : Date,
     nom                 : String,
-    commentaire		: [Schema.Comment],
+    commentaire		: {
+    	ref: "Comment",
+   		type: mongoose.Schema.Types.ObjectId
+    }
 });
 
 // create the model for users and expose it to our app

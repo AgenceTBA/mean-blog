@@ -4,10 +4,9 @@
 module.exports = function(app, passport) {
 
 //API
-	app.use('/api/things', require('./api/thing'));
 	app.use('/api/users', require('./api/user'));
-	app.use('/api/articles', require('./api/article'));
 	app.use('/api/comments', require('./api/comment'));
+	app.use('/api/articles', require('./api/article'));
 
 //LOGIN
 	app.post('/login', passport.authenticate('local-login',{

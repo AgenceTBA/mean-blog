@@ -4,7 +4,10 @@ var Schema = mongoose.Schema;
 var CommentDetail = new Schema({
     contenu             : String,
     date_creation       : Date,
-    user         : [Schema.User]
+    user         : {
+    	ref: "User",
+   		type: mongoose.Schema.Types.ObjectId
+    }
 });
 
 // create the model for users and expose it to our app
