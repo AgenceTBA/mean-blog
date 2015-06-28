@@ -4,7 +4,9 @@
 angular.module('myApp', [
   'ngRoute',
   'ngResource',
+  'ngCookies',
   'myApp.home',
+  'myApp.profil',
   'myApp.login',
   'myApp.register',
   'myApp.article',

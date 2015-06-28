@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.home', ['ngRoute'])
+angular.module('myApp.home', ['ngRoute','ngCookies'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/home', {
@@ -9,12 +9,11 @@ angular.module('myApp.home', ['ngRoute'])
   });
 }])
 
-.controller('HomeCtrl', function($scope, Article) {
+.controller('HomeCtrl', function($scope, Article, $cookieStore) {
     $scope.articles = [];
-
     Article.query({}, function (data) {
       $scope.articles = data;
-      console.log(data)
+      //console.log(data)
     });
 
 });

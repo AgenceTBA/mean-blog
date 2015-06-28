@@ -13,6 +13,7 @@ var mongoose   = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/tbaBlog'); // connect to our database
 */
 var Comment = require('./comment.model');
+
 // Get list of things
 exports.index = function(req, res) {
     Comment.find(function (err, result) {
