@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.login', ['ngRoute'])
+angular.module('myApp.login', ['ngRoute', 'ngStorage'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/login', {
@@ -9,7 +9,7 @@ angular.module('myApp.login', ['ngRoute'])
   });
 }])
 
-.controller('LoginCtrl', function($http, $scope, $location) {
+.controller('LoginCtrl', function($http, $scope, $location, $localStorage) {
 	$scope.user = {}
 
 	$scope.login = function () {
@@ -25,7 +25,10 @@ angular.module('myApp.login', ['ngRoute'])
 		    },
 		    data: {email: $scope.user.email, password: $scope.user.password}
 		}).success(function (data) {
-			console.log(data)
+			console.log(data.local);
+			$localStorage.user = data.local;
+			$localStorage.isLogged = true;
+			$location.path('#/home');
 		});
 	}
 });
