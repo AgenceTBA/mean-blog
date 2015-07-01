@@ -17,16 +17,15 @@ var bcrypt   = require('bcrypt-nodejs');
 
 // Get list of things
 exports.index = function(req, res) {
-	if (req.params.one) {
+	if (req.query.one == true) {
 	    User.find(function (err, result) {
 	      return res.json(200, result);
 	    });		
 	} else {
-
-		console.log("bcrypt.hashSync(req.params.password, bcrypt.genSaltSync(8), null)")
-		console.log(bcrypt.hashSync(req.params.password, bcrypt.genSaltSync(8), null))
-		console.log("bcrypt.hashSync(req.params.password, bcrypt.genSaltSync(8), null)")
-	  User.find({"local" : { "password" : bcrypt.hashSync(req.params.password, bcrypt.genSaltSync(8), null), "email" : req.params.email }}, function (err, result) {
+		console.log(req.query.password)
+		console.log(bcrypt.hashSync(req.query.password, bcrypt.genSaltSync(8), null))
+		console.log('{"local" : { "password" : ' + bcrypt.hashSync(req.query.password, bcrypt.genSaltSync(8), null) + ', "email" : ' + req.query.email + '}}')
+	  User.find({"local" : { "password" : bcrypt.hashSync(req.query.password, bcrypt.genSaltSync(8), null), "email" : req.query.email }}, function (err, result) {
 	      return res.json(200, result);
 	  });	
 	}

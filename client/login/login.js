@@ -25,16 +25,7 @@ angular.module('myApp.login', ['ngRoute'])
 		    },
 		    data: {email: $scope.user.email, password: $scope.user.password}
 		}).success(function (data) {
-			$http.get('/api/users', {
-				params: {
-					email: $scope.user.email,
-					password: $scope.user.password,
-					one: true
-				}
-			})
-			.success(function (data,status) {
-				console.log(data)
-			});
+			console.log(data)
 		});
 	}
 });
