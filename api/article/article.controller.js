@@ -34,8 +34,7 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   req.body.date_creation = new Date();
   req.body.date_modification = new Date();
-  req.body.admin = "Administrateur";
-  req.body.commentaire = [];
+  req.body.nom = "Administrateur";
   Article.create(req.body, function(err, article) {
     if(err) { return handleError(res, err); }
     return res.json(201, article);

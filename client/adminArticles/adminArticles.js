@@ -79,7 +79,6 @@ angular.module('myApp.adminArticles', ['ngRoute'])
 		    data: {
 		    	titre: $scope.article.titre,
 		    	contenu: $scope.article.contenu,
-		    	commentaire: []
 		    }
 		}).success(function (data) {
 			console.log(data)

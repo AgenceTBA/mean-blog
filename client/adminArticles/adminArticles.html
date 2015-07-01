@@ -5,6 +5,8 @@
 				<tr>
 					<th>Articles</th>
 					<th>Date de creation de l'article</th>
+					<th>Date de derniere modification</th>
+					<th>Auteur</th>
 					<th>Delete</th>
 					<th>Edit</th>
 				</tr>
@@ -13,6 +15,8 @@
 				<tr ng-repeat="article in listArticle track by $index">
 					<td>{{article.titre}}</td>
 					<td>{{article.date_creation}}</td>
+					<td>{{article.date_modification}}</td>
+					<td>{{article.nom}}</td>
 					<td>
 						<button class="glyphicon glyphicon-remove" ng-click="delArticle(article._id)">
 					</td>
@@ -34,7 +38,7 @@
                 <div class="form-group">
             		<label for="exampleInputComment">Contenu</label>
                     <textarea class="form-control" rows="3" placeholder="Contenu de l'article" ng-model="article.contenu"></textarea>
-                </div> {{article.choice.booleanButton}}
+                </div>
                 <button
 	                ng-show= "article.choice.booleanButton"
 	                type="submit"
