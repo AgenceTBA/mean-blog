@@ -10,7 +10,7 @@
 				<a href="#/article/{{article._id}}">{{article.nom}}</a> / 
 				<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>{{article.date_creation | date}} / 
 				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span> 
-				2 commentaires
+				{{article.commentaire.length}} commentaire(s)
 				<p class="resume">{{article.contenu | limitTo:255}}...</p>
 				<a href="#/article/{{article._id}}" class="btn btn-primary">Lire la suite</a>
 			</div>
