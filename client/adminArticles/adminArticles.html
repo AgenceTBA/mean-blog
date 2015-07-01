@@ -5,6 +5,7 @@
 				<tr>
 					<th>Articles</th>
 					<th>Delete</th>
+					<th>Edit</th>
 				</tr>
 				
 				<tbody>
@@ -12,14 +13,35 @@
 					<td>Réalité augmenté</td>
 					<td>
 						<button class="glyphicon glyphicon-remove" onclick="delete();">
+					</td>
 					<td>
+						<button class="glyphicon glyphicon-pencil" onclick="window.location.hash='addArticle';">
+					</td>
 				</tr>
 				<tr>
 					<td>Développeur Front-End junior deviendra Full-Stack</td>
 					<td>
 						<button class="glyphicon glyphicon-remove" onclick="delete();">
+					</td>
 					<td>
+						<button class="glyphicon glyphicon-pencil" onclick="window.location.hash='addArticle';">
+					</td>
 				</tr>
 				</tbody>
 			</table>
 		</div>
+
+		<div id="addArticle" class="well panel-default article padding">
+            <h4>Ajouter un article</h4>
+            <form role="form">
+            	<div class="form-group">
+	            	<label for="exampleInputTitre">Titre</label>
+	            	<input type="text" name="titre" class="form-control" placeholder="Titre de l'article" ng-modele=[article.]/>
+            	</div>
+                <div class="form-group">
+            		<label for="exampleInputComment">Contenu</label>
+                    <textarea class="form-control" rows="3" placeholder="Contenu de l'article"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </form>
+        </div>
