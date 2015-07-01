@@ -68,6 +68,7 @@ angular.module('myApp.adminProfil', ['ngRoute'])
 	//LE CLIQUE SUR UPDATE D ARTICLE APPELLE CETTE FONCTION
 	//ELLE CHARGE L ARTICLE A MODIFIER DANS LE FORMULAIRE
 	$scope.updateUser = function (id) {
+		console.log($scope.user)
 	    $http({
 		    method: 'PUT',
 		    url: '/api/users/' + id,
@@ -82,14 +83,16 @@ angular.module('myApp.adminProfil', ['ngRoute'])
 		    	nom: $scope.user.nom,
 		    	prenom: $scope.user.prenom,
 		    	email: $scope.user.email,
-		    	password: $scope.user.newPassword
+		    	password: $scope.user.newPassword,
+		    	isAdmin: $scope.user.isAdmin
 		    }
 
 		}).success(function (data) {
 			$scope.user.choice = {
 				booleanButton: false,
-				titre: "Ajouter un article"
+				titre: "Ajouter un user"
 			}	
 		});
-	}	$scope.getAllUser()
+	}
+	$scope.getAllUser()
 })

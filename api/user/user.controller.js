@@ -14,6 +14,7 @@ mongoose.connect('mongodb://localhost:27017/tbaBlog'); // connect to our databas
 */
 var User = require('./user.model');
 var bcrypt   = require('bcrypt-nodejs');
+var _ = require('lodash')
 
 // Get list of things
 exports.index = function(req, res) {
@@ -27,6 +28,21 @@ exports.show = function(req, res) {
     if(err) { return handleError(res, err); }
     if(!user) { return res.send(404); }
     return res.json(user);
+  });
+};
+
+// Updates an existing article in the DB.
+exports.update = function(req, res) {
+  if(req.body._id) { delete req.body._id; }
+  User.findById(req.params.id, function (err, user) {
+    if (err) { return handleError(res, err); }
+    if(!user) { return res.send(404); }
+    req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null);    
+    var updated = _.merge(user.local, req.body);
+    updated.save(function (err) {
+      if (err) { return handleError(res, err); }
+      return res.json(200, user);
+    });
   });
 };
 

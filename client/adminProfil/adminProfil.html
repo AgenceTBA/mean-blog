@@ -4,6 +4,7 @@
 					<th>Nom</th>
 					<th>Prenom</th>
 					<th>Email</th>
+					<th>Administrateur</th>
 					<th>Delete</th>
 					<th>Edit</th>
 				</tr>
@@ -13,6 +14,7 @@
 					<td>{{user.nom}}</td>
 					<td>{{user.prenom}}</td>
 					<td>{{user.email}}</td>
+					<td>{{user.isAdmin}}</td>
 					<td>
 						<button class="glyphicon glyphicon-remove" ng-click="delUser(user._id)">
 					</td>
@@ -43,6 +45,15 @@
 	            	<label for="exampleInputTitre">Changer le mots de passe</label>
 	            	<input type="text" name="titre" class="form-control" ng-model="user.newPassword" required/>
             	</div>
+            	<div class="form-group">
+            		<label for="exampleInputTitre">Est un administrateur ?</label>
+	            	<input type="checkbox"
+				       ng-model="user.isAdmin"
+				       name="Administrateur"
+				       ng-true-value=1
+				       ng-false-value=0
+				       >
+				</div>
                 <button
 	                ng-if= "user.choice.booleanButton == true"
 	                type="submit"
