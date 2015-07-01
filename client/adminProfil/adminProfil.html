@@ -1,56 +1,61 @@
-
-		
-		<div class="panel panel-default padding profil">
-			<form>
-				<img src="images/hemach_y.jpeg" class="img_profil" border=0/>
-				<span id="imageButton">
-						<a class="btn btn-warning btn-sm buttonCenter" border=0 onclick="showInput('image')">Edit</a>
-				</span>
-				<span id="imageInput">
-					<input id="input-1a" type="file" class="file" data-show-preview="false">
-				</span>
-				<table class="table table-hover">
-					<tr>
-						<td>Nom :</td>
-						<td>Hemachandra</td>
-						<td>
-							<span id="lastnameButton">
-							<a class="btn btn-warning btn-sm" onclick="showInput('lastname')">Edit</a>
-							</span>
-							<span id="lastnameInput">
-								<input type="text" class="form-control" id="exampleInputText" value="Hemachandra">
-							</span>
-						</td>
-					</tr>
-					<tr>
-						<td>Prénom :</td>
-						<td>Théophile</td>
-						<td>
-							<span id="firstnameButton">
-							<a class="btn btn-warning btn-sm" onclick="showInput('firstname')">Edit</a>
-							</span>
-							<span id="firstnameInput">
-								<input type="text" class="form-control" id="exampleInputText" value="Théophile">
-							</span>
-						</td>
-					</tr>
-					<tr>
-						<td>Mail :</td>
-						<td>theodu60raiii@tavu.fr</td>
-						<td>
-							<span id="emailButton">
-							<a class="btn btn-warning btn-sm" onclick="showInput('email')">Edit</a>
-							</span>
-							<span id="emailInput">
-								<input type="text" class="form-control" id="exampleInputText" value="theodu60raiii@tavu.fr">
-							</span>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3" align="center">
-							<button type="submit" class="btn btn-primary">Valider</button>
-						</td>
-					</tr>
-				</table>
-			</form>
+		<div class="panel panel-default article padding">
+			<table class="table table-hover">
+				<tr>
+					<th>Nom</th>
+					<th>Prenom</th>
+					<th>Email</th>
+					<th>Delete</th>
+					<th>Edit</th>
+				</tr>
+				
+				<tbody>
+				<tr ng-repeat="user in listUser track by $index">
+					<td>{{user.nom}}</td>
+					<td>{{user.prenom}}</td>
+					<td>{{user.email}}</td>
+					<td>
+						<button class="glyphicon glyphicon-remove" ng-click="delUser(user._id)">
+					</td>
+					<td>
+						<button class="glyphicon glyphicon-pencil" ng-click="modifUser(user._id);">
+					</td>
+				</tr>
+				</tbody>
+			</table>
 		</div>
+		
+		<div id="addArticle" class="well panel-default article padding" ng-model="user">
+            <h4 >{{user.choice.titre}}</h4>
+            <form role="form">
+            	<div class="form-group">
+	            	<label for="exampleInputTitre">Nom</label>
+	            	<input type="text" name="titre" class="form-control" ng-model="user.nom" required/>
+            	</div>
+            	<div class="form-group">
+	            	<label for="exampleInputTitre">Prenom</label>
+	            	<input type="text" name="titre" class="form-control" ng-model="user.prenom" required/>
+            	</div>
+            	<div class="form-group">
+	            	<label for="exampleInputTitre">Email</label>
+	            	<input type="text" name="titre" class="form-control" ng-model="user.email" required/>
+            	</div>
+            	<div class="form-group">
+	            	<label for="exampleInputTitre">Changer le mots de passe</label>
+	            	<input type="text" name="titre" class="form-control" ng-model="user.newPassword" required/>
+            	</div>
+                <button
+	                ng-if= "user.choice.booleanButton == true"
+	                type="submit"
+	                class="btn btn-primary"
+	                ng-click="updateUser(user._id)">
+	                Mettre à jour
+	            </button>
+                <button
+	                ng-if= "user.choice.booleanButton == false"
+                	type="submit"
+                	class="btn btn-primary"
+                	ng-click="addUser()">
+                	Ajouter
+                </button>
+            </form>
+        </div>

@@ -17,7 +17,6 @@ angular.module('myApp.adminArticles', ['ngRoute'])
 		booleanButton: false,
 		titre: "Ajouter un article"
 	}
-
 	$scope.getAllArticle = function () {
 		$http.get('/api/articles').success(function(data, status, headers, config) {    
 	      try { 
@@ -27,7 +26,6 @@ angular.module('myApp.adminArticles', ['ngRoute'])
 	    })
 	}
 	$scope.delArticle = function (id) {
-
 		$http.delete('/api/articles/' + id).success(function(data, status, headers, config) {    
 	      try { 
 	      	 	return;	
