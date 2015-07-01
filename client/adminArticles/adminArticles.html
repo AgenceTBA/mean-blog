@@ -4,44 +4,38 @@
 			<table class="table table-hover">
 				<tr>
 					<th>Articles</th>
+					<th>Date de creation de l'article</th>
 					<th>Delete</th>
 					<th>Edit</th>
 				</tr>
 				
 				<tbody>
-				<tr>
-					<td>Réalité augmenté</td>
+				<tr ng-repeat="article in listArticle track by $index">
+					<td>{{article.titre}}</td>
+					<td>{{article.date_creation}}</td>
 					<td>
-						<button class="glyphicon glyphicon-remove" onclick="delete();">
+						<button class="glyphicon glyphicon-remove" ng-click="delArticle(article._id)">
 					</td>
 					<td>
-						<button class="glyphicon glyphicon-pencil" onclick="window.location.hash='addArticle';">
-					</td>
-				</tr>
-				<tr>
-					<td>Développeur Front-End junior deviendra Full-Stack</td>
-					<td>
-						<button class="glyphicon glyphicon-remove" onclick="delete();">
-					</td>
-					<td>
-						<button class="glyphicon glyphicon-pencil" onclick="window.location.hash='addArticle';">
+						<button class="glyphicon glyphicon-pencil" ng-click="modifArticle(article._id);">
 					</td>
 				</tr>
 				</tbody>
 			</table>
 		</div>
 
-		<div id="addArticle" class="well panel-default article padding">
-            <h4>Ajouter un article</h4>
+		<div id="addArticle" class="well panel-default article padding" ng-model="article">
+            <h4 >{{article.choice.titre}}</h4>
             <form role="form">
             	<div class="form-group">
 	            	<label for="exampleInputTitre">Titre</label>
-	            	<input type="text" name="titre" class="form-control" placeholder="Titre de l'article" ng-modele=[article.]/>
+	            	<input type="text" name="titre" class="form-control" placeholder="Titre de l'article" ng-model="article.titre"/>
             	</div>
                 <div class="form-group">
             		<label for="exampleInputComment">Contenu</label>
-                    <textarea class="form-control" rows="3" placeholder="Contenu de l'article"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Ajouter</button>
+                    <textarea class="form-control" rows="3" placeholder="Contenu de l'article" ng-model="article.contenu"></textarea>
+                </div> {{article.choice.booleanButton}}
+                <button ng-hide= "article.choice.booleanButton" type="submit" class="btn btn-primary" ng-click="">Mettre à jour</button>
+                <button ng-show= "article.choice.booleanButton" type="submit" class="btn btn-primary" ng-click="">Ajouter</button>
             </form>
         </div>
