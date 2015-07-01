@@ -24,6 +24,7 @@ module.exports = function(app, passport) {
 		res.send('/login');
 	});
 	app.get('/loginSuccess', function(req, res, next) {
+		console.log(res.req.user)
 		res.send(res.req.user);
 	});
 
@@ -45,5 +46,11 @@ module.exports = function(app, passport) {
 	})
 	app.get('/profil', isLoggedIn, function (req, res) {
 		res.send('/#/profil');
+	})
+	app.get('/adminProfil', isLoggedIn, function (req, res) {
+		res.send('/#/adminProfil');
 	})	
+	app.get('/adminArticles', isLoggedIn, function (req, res) {
+		res.send('/#/adminArticles');
+	})
 };

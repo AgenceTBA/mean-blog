@@ -12,12 +12,12 @@
 </div>
         
 <!-- Comment -->
-<div class="media article" ng-repeat="commentaire in article.commentaire">
+<div class="media article" ng-repeat="commentaire in tabCommentaire">
     <div class="media-body">
-        <h4 class="media-heading">Aurex
-            <small>Mercredi 03 Juin 2014 à 10:34:40</small>
+        <h4 class="media-heading"><a href="{{commentaire.user}}">{{commentaire.auteur}}</a>
+            <small>{{commentaire.date_creation}}</small>
         </h4>
-        Ceci est un 1er commentaire
+        {{commentaire.contenu}}
     </div>
 </div>
 
@@ -27,8 +27,8 @@
     <form role="form">
         <div class="form-group">
             <label for="exampleInputComment">Commentaire</label>
-            <textarea class="form-control" rows="3" placeholder="Votre commentaire"></textarea>
+            <textarea class="form-control" rows="3" placeholder="Votre commentaire" ng-model="commentaire.contenu"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Envoyer</button>
+        <button type="submit" class="btn btn-primary" ng-click="addComment()">Envoyer</button>
     </form>
 </div>

@@ -1,23 +1,27 @@
-
-		
-		
-		<div class="panel panel-default padding profil">
-			<form>
-				<img src="images/hemach_y.jpeg" class="img_profil" border=0/>
-				<table class="table table-hover">
-					<tr>
-						<td>Nom :</td>
-						<td>Hemachandra</td>
-					</tr>
-					<tr>
-						<td>Prénom :</td>
-						<td>Théophile</td>
-					</tr>
-					<tr>
-						<td>Mail :</td>
-						<td>theodu60raiii@tavu.fr</td>
-					</tr>
-				</table>
-			</form>
-		</div>
-	
+<div id="addArticle" class="well panel-default article padding" ng-model="user">
+    <h4 >{{user.choice.titre}}</h4>
+    <form role="form">
+    	<div class="form-group">
+        	<label for="exampleInputTitre">Nom</label>
+        	<input type="text" name="titre" class="form-control" ng-model="user.nom" required/>
+    	</div>
+    	<div class="form-group">
+        	<label for="exampleInputTitre">Prenom</label>
+        	<input type="text" name="titre" class="form-control" ng-model="user.prenom" required/>
+    	</div>
+    	<div class="form-group">
+        	<label for="exampleInputTitre">Email</label>
+        	<input type="text" name="titre" class="form-control" ng-model="user.email" required/>
+    	</div>
+    	<div class="form-group">
+        	<label for="exampleInputTitre">Changer le mots de passe</label>
+        	<input type="text" name="titre" class="form-control" ng-model="user.newPassword" required/>
+    	</div>
+        <button
+            type="submit"
+            class="btn btn-primary"
+            ng-click="updateUser(user._id)">
+            Mettre à jour
+        </button>
+    </form>
+</div>

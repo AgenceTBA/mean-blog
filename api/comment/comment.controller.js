@@ -20,3 +20,19 @@ exports.index = function(req, res) {
       return res.json(200, result);
     });
 };
+// Get a single article
+exports.show = function(req, res) {
+  Comment.findById(req.params.id, function (err, comment) {
+    if(err) { return handleError(res, err); }
+    if(!comment) { return res.send(404); }
+    return res.json(comment.populate('commentaire'));
+  });
+};
+
+exports.create = function(req, res) {
+  console.log(req.body)
+  Comment.create(req.body, function(err, comment) {
+    if(err) { console.log(err) }
+    return res.json(201, comment);
+  });
+};

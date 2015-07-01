@@ -25,10 +25,11 @@ angular.module('myApp.login', ['ngRoute', 'ngStorage'])
 		    },
 		    data: {email: $scope.user.email, password: $scope.user.password}
 		}).success(function (data) {
-			console.log(data.local);
 			$localStorage.user = data.local;
+			$localStorage.user._id = data._id;
 			$localStorage.isLogged = true;
 			$localStorage.isAdmin = data.local.isAdmin;
+			
 			$location.path('#/home');
 		});
 	}

@@ -46,13 +46,21 @@ exports.update = function(req, res) {
   req.body.date_modification = new Date();
   if(req.body._id) { delete req.body._id; }
   Article.findById(req.params.id, function (err, article) {
-    if (err) { return handleError(res, err); }
+    if (err) {     console.log(err) }
     if(!article) { return res.send(404); }
-    var updated = _.merge(article, req.body);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.json(200, article);
-    });
+    if (req.body.commentaire) {
+      article.commentaire.push(req.body.commentaire)
+            article.save(function (err) {
+        if (err) { return handleError(res, err); }
+        return res.json(200, article);
+      });  
+    } else {
+      var updated = _.merge(article, req.body);
+      updated.save(function (err) {
+        if (err) { return handleError(res, err); }
+        return res.json(200, article);
+      });      
+    }
   });
 };
 
