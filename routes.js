@@ -43,4 +43,7 @@ module.exports = function(app, passport) {
 	app.get('/profil', isLoggedIn, function (req, res) {
 		res.send('/#/profil');
 	})
+	app.get('/profil', isLoggedIn, function (req, res) {
+		res.send('/#/profil');
+	})	
 };

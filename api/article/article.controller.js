@@ -32,6 +32,7 @@ exports.show = function(req, res) {
 
 // Creates a new article in the DB.
 exports.create = function(req, res) {
+  console.log("create")
   Article.create(req.body, function(err, article) {
     if(err) { return handleError(res, err); }
     return res.json(201, article);
@@ -39,6 +40,7 @@ exports.create = function(req, res) {
 };
 
 // Updates an existing article in the DB.
+/*
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
   Article.findById(req.params.id, function (err, article) {
@@ -51,7 +53,25 @@ exports.update = function(req, res) {
     });
   });
 };
+*/
+exports.update = function(req, res) {
+  if(req.body._id) { delete req.body._id; }
 
+  Article.findById(req.params.id, function (err, list) {
+    if (err) { return handleError(err); }
+    if(!list) { return res.send(404); }
+
+    // var updated = _.merge(list, req.body);
+
+    _.extend(article, req.body);
+
+    //changed from updated to 'list'
+    article.save(function (err) {
+      if (err) { return handleError(err); }
+      return res.json(200, list);
+    });
+  });
+};
 // Deletes a article from the DB.
 exports.destroy = function(req, res) {
   Article.findById(req.params.id, function (err, article) {

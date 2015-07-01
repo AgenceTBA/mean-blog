@@ -10,5 +10,11 @@ angular.module('myApp.article', ['ngRoute'])
 }])
 
 .controller('ArticleCtrl', function(Article) {
-
+    $http.get('/api/users').success(function(data, status, headers, config) {    
+      try { 
+      	  console.log(data)
+          return cb()
+        }
+      catch (e) {console.log(e)}
+    })
 })
