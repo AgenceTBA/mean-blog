@@ -10,21 +10,19 @@ angular.module('myApp.adminArticles', ['ngRoute'])
 }])
 
 
-.controller('adminArticlesCtrl', function($scope, $http, $localStorage, $location) {
+.controller('adminArticlesCtrl', function($scope, $http, $localStorage, $location, Article) {
 	$scope.article = {}
 	$scope.listArticle = [];
 	$scope.article.choice = {
 		booleanButton: false,
 		titre: "Ajouter un article"
 	}
-	$scope.getAllArticle = function () {
-		$http.get('/api/articles').success(function(data, status, headers, config) {    
-	      try { 
-	      	  $scope.listArticle = data;
-	        }
-	      catch (e) {console.log(e)}
-	    })
-	}
+
+    Article.query({}, function (data) {
+      $scope.listArticle = data;
+      console.log(data)
+    });
+
 	$scope.delArticle = function (id) {
 		$http.delete('/api/articles/' + id).success(function(data, status, headers, config) {    
 	      try { 
@@ -72,6 +70,12 @@ angular.module('myApp.adminArticles', ['ngRoute'])
 				booleanButton: false,
 				titre: "Ajouter un article"
 			}	
+			Article.query({}, function(data) {
+      			$scope.listArticle = data;
+      			console.log(data);
+      			$scope.article.titre = "";
+		    	$scope.article.contenu = "";
+    		});
 		});
 	}
 	$scope.addArticle = function () {
@@ -88,16 +92,17 @@ angular.module('myApp.adminArticles', ['ngRoute'])
 		    data: {
 		    	titre: $scope.article.titre,
 		    	contenu: $scope.article.contenu,
-		    	nom: $localStorage.user.nom
+		    	nom: $localStorage.user.prenom + " " + $localStorage.user.nom
 		    }
-		}).success(function (data) {
-			console.log(data)
+		})
+		.success(function(data) {
+    		Article.query({}, function(data) {
+      			$scope.listArticle = data;
+      			console.log(data);
+      			$scope.article.titre = "";
+		    	$scope.article.contenu = "";
+    		});
+			console.log(data);
 		});
 	}
-
-//MAIN
-
-$scope.getAllArticle()
-
-
-})
+});
