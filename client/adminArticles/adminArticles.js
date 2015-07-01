@@ -10,7 +10,7 @@ angular.module('myApp.adminArticles', ['ngRoute'])
 }])
 
 
-.controller('adminArticlesCtrl', function($scope, $http) {
+.controller('adminArticlesCtrl', function($scope, $http, $localStorage) {
 	$scope.article = {}
 	$scope.listArticle = [];
 	$scope.article.choice = {
@@ -45,7 +45,6 @@ angular.module('myApp.adminArticles', ['ngRoute'])
 				booleanButton: true,
 				titre: "Modifier un article"
 			}
-			$scope.updateArticle(id);
 			return;
 	        }
 	      catch (e) {console.log(e)}
@@ -79,6 +78,7 @@ angular.module('myApp.adminArticles', ['ngRoute'])
 		    data: {
 		    	titre: $scope.article.titre,
 		    	contenu: $scope.article.contenu,
+		    	nom: $localStorage.user.nom
 		    }
 		}).success(function (data) {
 			console.log(data)

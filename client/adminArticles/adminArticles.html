@@ -38,16 +38,16 @@
                 <div class="form-group">
             		<label for="exampleInputComment">Contenu</label>
                     <textarea class="form-control" rows="3" placeholder="Contenu de l'article" ng-model="article.contenu"></textarea>
-                </div>
+                </div>{{article.choice.booleanButton}}
                 <button
-	                ng-show= "article.choice.booleanButton"
+	                ng-if= "article.choice.booleanButton == true"
 	                type="submit"
 	                class="btn btn-primary"
 	                ng-click="updateArticle(article._id)">
 	                Mettre à jour
 	            </button>
                 <button
-                	ng-hide= "article.choice.booleanButton"
+	                ng-if= "article.choice.booleanButton == false"
                 	type="submit"
                 	class="btn btn-primary"
                 	ng-click="addArticle()">
