@@ -32,9 +32,10 @@ exports.show = function(req, res) {
 
 // Creates a new article in the DB.
 exports.create = function(req, res) {
-  req.body.date_creation = new Date()
-  req.body.admin = "Administrateur"
-  req.body.commentaire = []
+  req.body.date_creation = new Date();
+  req.body.date_modification = new Date();
+  req.body.admin = "Administrateur";
+  req.body.commentaire = [];
   Article.create(req.body, function(err, article) {
     if(err) { return handleError(res, err); }
     return res.json(201, article);
@@ -43,6 +44,7 @@ exports.create = function(req, res) {
 
 // Updates an existing article in the DB.
 exports.update = function(req, res) {
+  req.body.date_modification = new Date();
   if(req.body._id) { delete req.body._id; }
   Article.findById(req.params.id, function (err, article) {
     if (err) { return handleError(res, err); }

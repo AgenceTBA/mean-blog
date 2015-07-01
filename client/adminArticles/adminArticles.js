@@ -41,9 +41,12 @@ angular.module('myApp.adminArticles', ['ngRoute'])
 		$http.get('/api/articles/' + id).success(function(data, status, headers, config) {    
 	      try { 
 			$scope.article = data;
-			$scope.article.choice.booleanButton = true;
-			$scope.article.choice.titre = "Modifier un article"
-		      	  return;
+			$scope.article.choice = {
+				booleanButton: true,
+				titre: "Modifier un article"
+			}
+			$scope.updateArticle(id);
+			return;
 	        }
 	      catch (e) {console.log(e)}
 	    })
@@ -53,8 +56,10 @@ angular.module('myApp.adminArticles', ['ngRoute'])
 	$scope.updateArticle = function (id) {
 		$http.put('/api/articles/' + id).success(function(data, status, headers, config) {    
 	      try { 
-			$scope.article.choice.booleanButton = true;
-			$scope.article.choice.titre = "Ajouter un article"	
+			$scope.article.choice = {
+				booleanButton: false,
+				titre: "Ajouter un article"
+			}	
 			return;
 	        }
 	      catch (e) {console.log(e)}
@@ -74,8 +79,6 @@ angular.module('myApp.adminArticles', ['ngRoute'])
 		    data: {
 		    	titre: $scope.article.titre,
 		    	contenu: $scope.article.contenu,
-		    	date_creation: new Date(),
-		    	nom: "admin", //remplacer par la variable user
 		    	commentaire: []
 		    }
 		}).success(function (data) {

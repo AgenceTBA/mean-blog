@@ -5,6 +5,7 @@ var ArticleDetail = new Schema({
     titre               : String,
     contenu             : String,
     date_creation       : Date,
+    date_modification   : Date,
     nom                 : String,
     commentaire		: {
     	ref: "Comment",

@@ -35,7 +35,19 @@
             		<label for="exampleInputComment">Contenu</label>
                     <textarea class="form-control" rows="3" placeholder="Contenu de l'article" ng-model="article.contenu"></textarea>
                 </div> {{article.choice.booleanButton}}
-                <button ng-hide= "article.choice.booleanButton" type="submit" class="btn btn-primary" ng-click="">Mettre à jour</button>
-                <button ng-show= "article.choice.booleanButton" type="submit" class="btn btn-primary" ng-click="">Ajouter</button>
+                <button
+	                ng-show= "article.choice.booleanButton"
+	                type="submit"
+	                class="btn btn-primary"
+	                ng-click="updateArticle(article._id)">
+	                Mettre à jour
+	            </button>
+                <button
+                	ng-hide= "article.choice.booleanButton"
+                	type="submit"
+                	class="btn btn-primary"
+                	ng-click="addArticle()">
+                	Ajouter
+                </button>
             </form>
         </div>
