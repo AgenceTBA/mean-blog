@@ -10,7 +10,7 @@ angular.module('myApp.adminArticles', ['ngRoute'])
 }])
 
 
-.controller('adminArticlesCtrl', function($scope, $http, $localStorage) {
+.controller('adminArticlesCtrl', function($scope, $http, $localStorage, $location) {
 	$scope.article = {}
 	$scope.listArticle = [];
 	$scope.article.choice = {
@@ -38,6 +38,7 @@ angular.module('myApp.adminArticles', ['ngRoute'])
 	//LE CLIQUE SUR MODIFICATION D ARTICLE APPELLE CETTE FONCTION
 	//ELLE CHARGE L ARTICLE A MODIFIER DANS LE FORMULAIRE
 	$scope.modifArticle = function (id) {
+		$location.hash('addArticle');
 		$http.get('/api/articles/' + id).success(function(data, status, headers, config) {    
 	      try { 
 			$scope.article = data;

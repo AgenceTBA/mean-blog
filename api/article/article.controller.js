@@ -34,8 +34,9 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   req.body.date_creation = new Date();
   req.body.date_modification = new Date();
+  req.body.commentaire = new Array()
   Article.create(req.body, function(err, article) {
-    if(err) { return handleError(res, err); }
+    if(err) { console.log(err) }
     return res.json(201, article);
   });
 };
