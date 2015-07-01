@@ -9,12 +9,9 @@ angular.module('myApp.article', ['ngRoute'])
   });
 }])
 
-.controller('ArticleCtrl', function(Article) {
-    $http.get('/api/users').success(function(data, status, headers, config) {    
-      try { 
-      	  console.log(data)
-          return cb()
-        }
-      catch (e) {console.log(e)}
-    })
+.controller('ArticleCtrl', function(Article, $http, $routeParams, $scope) {
+    Article.get({id:$routeParams.id}, function (data) {
+      $scope.article = data;
+      console.log(data);
+    });
 })
