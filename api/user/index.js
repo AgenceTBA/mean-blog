@@ -7,5 +7,6 @@ var router = express.Router();
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);
+router.get('/logout', controller.logout);
 
 module.exports = router;

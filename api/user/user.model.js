@@ -8,6 +8,7 @@ var UserDetail = new Schema({
         password     : String,
         prenom       : String,
         nom          : String,
+        isAdmin      : { type: Number, default: 0 }
     },
     facebook         : {
         id           : String,

@@ -39,4 +39,6 @@ exports.show = function(req, res) {
     return res.json(user);
   });
 };
-
+exports.logout = function(req, res) {
+    return res.json([]);
+};
