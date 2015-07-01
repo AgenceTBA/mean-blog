@@ -53,16 +53,27 @@ angular.module('myApp.adminArticles', ['ngRoute'])
 	//LE CLIQUE SUR UPDATE D ARTICLE APPELLE CETTE FONCTION
 	//ELLE CHARGE L ARTICLE A MODIFIER DANS LE FORMULAIRE
 	$scope.updateArticle = function (id) {
-		$http.put('/api/articles/' + id).success(function(data, status, headers, config) {    
-	      try { 
+	    $http({
+		    method: 'PUT',
+		    url: '/api/articles/' + id,
+		    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+		    transformRequest: function(obj) {
+		        var str = [];
+		        for(var p in obj)
+		        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+		        return str.join("&");
+		    },
+		    data: {
+		    	titre: $scope.article.titre,
+		    	contenu: $scope.article.contenu,
+		    }
+
+		}).success(function (data) {
 			$scope.article.choice = {
 				booleanButton: false,
 				titre: "Ajouter un article"
 			}	
-			return;
-	        }
-	      catch (e) {console.log(e)}
-	    })
+		});
 	}
 	$scope.addArticle = function () {
 		$http({
