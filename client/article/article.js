@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.article', ['ngRoute'])
+angular.module('myApp.article', ['ngRoute', 'ngStorage'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/article/:id', {
@@ -9,9 +9,12 @@ angular.module('myApp.article', ['ngRoute'])
   });
 }])
 
-.controller('ArticleCtrl', function(Article, $http, $routeParams, $scope) {
+.controller('ArticleCtrl', function(Article, $http, $routeParams, $scope, $localStorage) {
+    $scope.storage = $localStorage;
+
     Article.get({id:$routeParams.id}, function (data) {
       $scope.article = data;
       console.log(data);
     });
-})
+
+});
