@@ -13,8 +13,9 @@ angular.module('myApp.adminArticles', ['ngRoute'])
 .controller('adminArticlesCtrl', function($scope, $http) {
 	$scope.article = {}
 	$scope.listArticle = [];
+	$scope.article.booleanButton = false;
 
-	function getAllArticle() {
+	$scope.getAllArticle = function () {
 		$http.get('/api/articles').success(function(data, status, headers, config) {    
 	      try { 
 	      	  $scope.listArticle = data;
@@ -26,6 +27,29 @@ angular.module('myApp.adminArticles', ['ngRoute'])
 		$http.delete('/api/articles/' + id).success(function(data, status, headers, config) {    
 	      try { 
 	      	 	return;	
+	        }
+	      catch (e) {console.log(e)}
+	    })
+	}
+	//LE CLIQUE SUR MODIFICATION D ARTICLE APPELLE CETTE FONCTION
+	//ELLE CHARGE L ARTICLE A MODIFIER DANS LE FORMULAIRE
+	$scope.modifArticle = function (id) {
+		$http.get('/api/articles' + id).success(function(data, status, headers, config) {    
+	      try { 
+	      	  $scope.article = data;
+	      	  $scope.article.booleanButton = true
+	      	  return;
+	        }
+	      catch (e) {console.log(e)}
+	    })
+	}
+	//LE CLIQUE SUR UPDATE D ARTICLE APPELLE CETTE FONCTION
+	//ELLE CHARGE L ARTICLE A MODIFIER DANS LE FORMULAIRE
+	$scope.updateArticle = function (id) {
+		$http.put('/api/articles/' + id).success(function(data, status, headers, config) {    
+	      try { 
+	      	  	$scope.article.booleanButton = false;
+	      	 	return;
 	        }
 	      catch (e) {console.log(e)}
 	    })
@@ -52,4 +76,7 @@ angular.module('myApp.adminArticles', ['ngRoute'])
 			console.log(data)
 		});
 	}
+
+
+
 })
