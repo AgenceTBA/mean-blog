@@ -9,11 +9,27 @@ angular.module('myApp.home', ['ngRoute','ngCookies'])
   });
 }])
 
-.controller('HomeCtrl', function($scope, Article, $cookieStore) {
+.controller('HomeCtrl', function($scope, Article, $cookieStore, $localStorage, $http, $location) {
+
+	$scope.storage = $localStorage;
+
     $scope.articles = [];
     Article.query({}, function (data) {
       $scope.articles = data;
-      //console.log(data)
+      console.log(data)
     });
+
+    $scope.logout = function(){
+    	delete($localStorage.user);
+  		$scope.storage.isAdmin = false;
+  		$scope.storage.isLogged = false;
+  		$location.path('#/home');
+    	$http({
+		    method: 'GET',
+		    url: 'api/users/logout',
+		}).success(function (data) {
+			console.log(data);
+		});
+    }
 
 });

@@ -13,14 +13,23 @@
         <link rel="stylesheet" href="css/app.css">
     </head>
     <body>
-        <div class="page-header">
+        <div class="page-header" ng-controller="HomeCtrl">
             <a href="#/home" class="homeLink"><img id="logo_header" src="images/logo.png" alt="Agence TBA" /> TBA Blog</a>
             <ul class="nav nav-pills on_right" role="tablist">
+<<<<<<< HEAD
                 <li role="presentation" class="active"><a href="#/home">Accueil</a></li>
                 <li role="presentation"><a href="#/profil">Profil</a></li>
                 <li role="presentation"><a href="#/adminArticles">Admininistration</a></li>
                 <li role="presentation"><a href="#/login">Connexion</a></li>
                 <li role="presentation"><a href="#/register">S'enregistrer</a></li>
+=======
+                <li><a href="#/home">Accueil</a></li>
+                <li ng-show="storage.isLogged"><a href="#/profil">Profil</a></li>
+                <li ng-show="storage.isLogged"><a href="#/home" ng-click="logout()">Déconnexion</a></li>
+                <li ng-show="storage.isAdmin"><a href="#/profil">Admininistration</a></li>
+                <li ng-show="!storage.isLogged"><a href="#/login">Connexion</a></li>
+                <li ng-show="!storage.isLogged"><a href="#/register">S'enregistrer</a></li>
+>>>>>>> origin/master
             </ul>
         </div>
         

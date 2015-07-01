@@ -28,6 +28,7 @@ angular.module('myApp.login', ['ngRoute', 'ngStorage'])
 			console.log(data.local);
 			$localStorage.user = data.local;
 			$localStorage.isLogged = true;
+			$localStorage.isAdmin = data.local.isAdmin;
 			$location.path('#/home');
 		});
 	}
