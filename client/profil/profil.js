@@ -12,9 +12,6 @@ angular.module('myApp.profil', ['ngRoute'])
 .controller('ProfilCtrl', function($scope, User) {
     $scope.user = [];
 
-    User.get({}, function (data) {
-      $scope.user = data;
-      console.log(data)
-    });
+
 
 });

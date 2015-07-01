@@ -3,6 +3,13 @@
 
 module.exports = function(app, passport) {
 
+	function isLoggedIn(req, res, next) {
+	    if (req.isAuthenticated())
+	        return next();
+	    res.statusCode = 401;
+	    res.send('/#/login');
+	}
+
 //API
 	app.use('/api/users', require('./api/user'));
 	app.use('/api/comments', require('./api/comment'));
@@ -17,10 +24,10 @@ module.exports = function(app, passport) {
 		res.send('/login');
 	});
 	app.get('/loginSuccess', function(req, res, next) {
-		res.send('/home');
+		res.send(res.req.user);
 	});
+
 //INSCRIPTION
-    // process the signup form
     app.post('/signup', passport.authenticate('local-signup', {
         successRedirect : '/signupSuccess', // redirect to the secure profile section
         failureRedirect : '/signupFailure', // redirect back to the signup page if there is an error
@@ -32,16 +39,8 @@ module.exports = function(app, passport) {
 		res.send('/login');
 	});
 
-
 //PAGE PRIVE
 	app.get('/profil', isLoggedIn, function (req, res) {
 		res.send('/#/profil');
 	})
-
-	function isLoggedIn(req, res, next) {
-	    if (req.isAuthenticated())
-	        return next();
-	    res.statusCode = 401;
-	    res.send('/#/login');
-	}
 };
