@@ -12,26 +12,38 @@ angular.module('myApp.article', ['ngRoute', 'ngStorage'])
 .controller('ArticleCtrl', function(Article, $http, $routeParams, $scope, $localStorage) {
     $scope.storage = $localStorage;
 	$scope.commentaire = {contenu: ""}
+
+	$scope.getComment = function (idCommentaire, cb) {
+	    $http.get('/api/comments/' + idCommentaire).success(function(comment, status, headers, config) {
+	    	try {
+		    	return cb(comment)
+	    	} catch (e) {
+	    		console.log(e)
+	    	}
+	    })	
+	}
+	$scope.getUser = function (idUser, cb) {
+		$http.get('/api/users/' + idUser).success(function(user, status, headers, config) {    
+			try { 
+				return cb (user);
+			}
+			catch (e) {console.log(e)}
+		})
+	} 
 	$scope.getFullPage = function () {
 	    Article.get({id:$routeParams.id}, function (data) {
 	      $scope.article = data;
 	      $scope.tabCommentaire = []
 	      for (var i in $scope.article.commentaire) {
-	      	$http.get('/api/comments/' + $scope.article.commentaire[i]).success(function(comment, status, headers, config) {    
-		      try { 
-			      	$http.get('/api/users/' + comment.user).success(function(user, status, headers, config) {    
-				      try { 
-				      		comment.auteur = user.local.nom + " " + user.local.prenom 
-							$scope.tabCommentaire.push(comment);
-							return;
-				        }
-				      catch (e) {console.log(e)}
-				    })
-		        }
-		      catch (e) {console.log(e)}
-		    })
+	      	$scope.getComment($scope.article.commentaire[i], function (comment) {
+		      	$scope.getUser(comment.user, function (user) {
+		      		comment.auteur = user.local.nom + " " + user.local.prenom
+		      		$scope.tabCommentaire.push(comment);
+		      		$scope.article.nbComs = $scope.tabCommentaire.length
+		      	})
+	      	})
 	      }
-	    });		
+	    });	
 	}
 	$scope.addComment = function () {
 		console.log($localStorage.user)
