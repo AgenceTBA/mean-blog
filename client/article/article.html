@@ -14,16 +14,12 @@
 <!-- Comment -->
 <div
     class="media article" ng-repeat="commentaire in tabCommentaire" 
-    ng-if=" (storage.isAdmin == 1 && (commentaire.isOk == 1 || commentaire.isOk == 0)) ||
-            (storage.isAdmin == 0 && (commentaire.isOk == 1))"
-
-    >
+    ng-if="(commentaire.isOk == 1) || (storage.isAdmin)">
     <div class="media-body">
         <h4 class="media-heading"><a href="{{commentaire.user}}">{{commentaire.auteur}}</a>
             <small>{{commentaire.date_creation | date}}</small>
         </h4>
-        <button class="glyphicon glyphicon-remove on_right btn btn-danger btn-sm" ng-click="delComment(commentaire._id)"></button>
-        <button class="glyphicon glyphicon-ok on_right btn btn-success btn-sm" ng-click="setOkComment(commentaire._id)"></button>
+        <button ng-if="storage.isAdmin" class="glyphicon glyphicon-remove on_right btn btn-danger btn-sm" ng-click="delComment(commentaire._id)"></button>
         {{commentaire.contenu}}
     </div>
 </div>

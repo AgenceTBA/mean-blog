@@ -33,13 +33,15 @@ angular.module('myApp.article', ['ngRoute', 'ngStorage'])
 	$scope.getFullPage = function () {
 	    Article.get({id:$routeParams.id}, function (data) {
 	      $scope.article = data;
-	      $scope.tabCommentaire = []
+	      $scope.tabCommentaire = [];
+	      $scope.article.nbComs = 0;
 	      for (var i in $scope.article.commentaire) {
 	      	$scope.getComment($scope.article.commentaire[i], function (comment) {
 		      	$scope.getUser(comment.user, function (user) {
 		      		comment.auteur = user.local.nom + " " + user.local.prenom
 		      		$scope.tabCommentaire.push(comment);
-		      		$scope.article.nbComs = $scope.tabCommentaire.length
+		      		if (comment.isOk == 1)
+		      			$scope.article.nbComs++;
 		      	})
 	      	})
 	      }
@@ -77,7 +79,7 @@ angular.module('myApp.article', ['ngRoute', 'ngStorage'])
 			    	commentaire: comment._id
 			    }
 			}).success(function (data) {
-				
+				$scope.getFullPage();
 			});
 		});
 	}
