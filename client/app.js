@@ -12,7 +12,7 @@ angular.module('myApp', [
   'myApp.article',
   'myApp.service',
   'myApp.adminArticles',
-  'myApp.adminProfil'
+  'myApp.adminProfil',
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/home'});

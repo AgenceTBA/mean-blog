@@ -24,10 +24,14 @@ module.exports = function(app, passport) {
 		res.send('/login');
 	});
 	app.get('/loginSuccess', function(req, res, next) {
-		console.log(res.req.user)
 		res.send(res.req.user);
 	});
-
+//LOGOUT
+	app.get('/logout', function(req, res){
+	  console.log("ici")
+	  req.logout();
+	  res.redirect('/');
+	});
 //INSCRIPTION
     app.post('/signup', passport.authenticate('local-signup', {
         successRedirect : '/signupSuccess', // redirect to the secure profile section
@@ -47,9 +51,11 @@ module.exports = function(app, passport) {
 	app.get('/profil', isLoggedIn, function (req, res) {
 		res.send('/#/profil');
 	})
+	/*
 	app.get('/adminProfil', isLoggedIn, function (req, res) {
 		res.send('/#/adminProfil');
-	})	
+	})
+	*/	
 	app.get('/adminArticles', isLoggedIn, function (req, res) {
 		res.send('/#/adminArticles');
 	})

@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 var CommentDetail = new Schema({
     contenu             : String,
     date_creation       : Date,
+    isOk				: { type: Number, default: 0 },
     user         : {
     	ref: "User",
    		type: mongoose.Schema.Types.ObjectId

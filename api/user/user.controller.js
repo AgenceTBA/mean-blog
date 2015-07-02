@@ -58,5 +58,6 @@ exports.destroy = function(req, res) {
   });
 };
 exports.logout = function(req, res) {
+  res.statusCode(200)
     return res.json([]);
 };

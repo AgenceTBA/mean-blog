@@ -12,7 +12,7 @@
 </div>
         
 <!-- Comment -->
-<div class="media article" ng-repeat="commentaire in tabCommentaire">
+<div class="media article" ng-repeat="commentaire in tabCommentaire" ng-if = "commentaire.isOk == 1">
     <div class="media-body">
         <h4 class="media-heading"><a href="{{commentaire.user}}">{{commentaire.auteur}}</a>
             <small>{{commentaire.date_creation}}</small>

@@ -18,8 +18,8 @@
             <ul class="nav nav-pills on_right" role="tablist">
                 <li><a href="#/home">Accueil</a></li>
                 <li ng-show="storage.isLogged"><a href="#/profil">Profil</a></li>
-                <li ng-show="storage.isLogged"><a href="#/home" ng-click="logout()">Déconnexion</a></li>
-                <li ng-show="storage.isAdmin"><a href="#/profil">Admininistration</a></li>
+                <li ng-show="storage.isLogged"><a ng-click="logout()">Déconnexion</a></li>
+                <li ng-show="storage.isAdmin"><a href="#/adminArticles">Admininistration</a></li>
                 <li ng-show="!storage.isLogged"><a href="#/login">Connexion</a></li>
                 <li ng-show="!storage.isLogged"><a href="#/register">S'enregistrer</a></li>
             </ul>

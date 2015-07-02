@@ -16,7 +16,6 @@ angular.module('myApp.home', ['ngRoute','ngCookies'])
     $scope.articles = [];
     Article.query({}, function (data) {
       $scope.articles = data;
-      console.log(data)
     });
 
     $scope.logout = function(){
@@ -26,9 +25,9 @@ angular.module('myApp.home', ['ngRoute','ngCookies'])
   		$location.path('#/home');
     	$http({
 		    method: 'GET',
-		    url: 'api/users/logout',
+		    url: '/logout',
 		}).success(function (data) {
-			console.log(data);
+      alert('done')
 		});
     }
 

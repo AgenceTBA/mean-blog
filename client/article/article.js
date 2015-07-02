@@ -12,26 +12,27 @@ angular.module('myApp.article', ['ngRoute', 'ngStorage'])
 .controller('ArticleCtrl', function(Article, $http, $routeParams, $scope, $localStorage) {
     $scope.storage = $localStorage;
 	$scope.commentaire = {contenu: ""}
-    Article.get({id:$routeParams.id}, function (data) {
-      $scope.article = data;
-      $scope.tabCommentaire = []
-
-      for (var i in $scope.article.commentaire) {
-      	$http.get('/api/comments/' + $scope.article.commentaire[i]).success(function(comment, status, headers, config) {    
-	      try { 
-		      	$http.get('/api/users/' + comment.user).success(function(user, status, headers, config) {    
-			      try { 
-			      		comment.auteur = user.local.nom + " " + user.local.prenom 
-						$scope.tabCommentaire.push(comment);
-						return;
-			        }
-			      catch (e) {console.log(e)}
-			    })
-	        }
-	      catch (e) {console.log(e)}
-	    })
-      }
-    });
+	$scope.getFullPage = function () {
+	    Article.get({id:$routeParams.id}, function (data) {
+	      $scope.article = data;
+	      $scope.tabCommentaire = []
+	      for (var i in $scope.article.commentaire) {
+	      	$http.get('/api/comments/' + $scope.article.commentaire[i]).success(function(comment, status, headers, config) {    
+		      try { 
+			      	$http.get('/api/users/' + comment.user).success(function(user, status, headers, config) {    
+				      try { 
+				      		comment.auteur = user.local.nom + " " + user.local.prenom 
+							$scope.tabCommentaire.push(comment);
+							return;
+				        }
+				      catch (e) {console.log(e)}
+				    })
+		        }
+		      catch (e) {console.log(e)}
+		    })
+	      }
+	    });		
+	}
 	$scope.addComment = function () {
 		console.log($localStorage.user)
 	    $http({
@@ -64,14 +65,36 @@ angular.module('myApp.article', ['ngRoute', 'ngStorage'])
 			    	commentaire: comment._id
 			    }
 			}).success(function (data) {
-				Article.query({}, function(data) {
-	      			$scope.listArticle = data;
-	      			console.log(data);
-	      			$scope.article.titre = "";
-			    	$scope.article.contenu = "";
-	    		});
+				
 			});
 		});
 	}
-
+	$scope.setOkComment = function (id) {
+		    $http({
+			    method: 'PUT',
+			    url: '/api/comments/' + id,
+			    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			    transformRequest: function(obj) {
+			        var str = [];
+			        for(var p in obj)
+			        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+			        return str.join("&");
+			    },
+			    data: {
+			    	isOk: 1
+			    }
+			}).success(function (data) {
+				$scope.getFullPage();
+			});
+	}
+	$scope.delComment = function (id) {
+		$http.delete('/api/comments/' + id).success(function(data, status, headers, config) {    
+	      try { 
+	      		$scope.getFullPage();
+	      	 	return;	
+	        }
+	      catch (e) {console.log(e)}
+	    })
+	}
+	$scope.getFullPage();
 });
